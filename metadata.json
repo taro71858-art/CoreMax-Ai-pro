@@ -1,0 +1,6 @@
+{
+  "name": "Бизнес-аналитик",
+  "description": "Умное приложение для бизнеса CoreMaX AI. Расчёт прибыли, маржа, причины убытков, конвертер валют, сценарии Что если, ИИ-советник, счета и высшая аналитика.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

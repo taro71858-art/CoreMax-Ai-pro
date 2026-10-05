@@ -1,0 +1,243 @@
+package com.example.data.models
+
+data class Currency(
+    val code: String,
+    val name: String,
+    val symbol: String,
+    val flag: String,
+    val rateToUsd: Double, // How many units of this currency per 1 USD
+    val region: CurrencyRegion,
+    val isCrypto: Boolean = false,
+    val isMetal: Boolean = false,
+    val isOutdated: Boolean = false,
+    val isFavorite: Boolean = false
+)
+
+enum class CurrencyRegion(val displayName: String) {
+    POPULAR("Популярные"),
+    EUROPE("Европа"),
+    ASIA("Азия"),
+    AMERICA("Америка"),
+    AFRICA("Африка"),
+    OCEANIA("Океания"),
+    CRYPTO("Криптовалюты"),
+    METALS("Металлы и сырьё"),
+    OUTDATED("Устаревшие")
+}
+
+object CurrencyCatalog {
+    val defaultCurrency = Currency("RUB", "Российский рубль", "₽", "🇷🇺", 92.50, CurrencyRegion.POPULAR)
+
+    val allCurrencies: List<Currency> = listOf(
+        // Popular / Major
+        Currency("USD", "Доллар США", "$", "🇺🇸", 1.0, CurrencyRegion.POPULAR),
+        Currency("EUR", "Евро", "€", "🇪🇺", 0.92, CurrencyRegion.POPULAR),
+        Currency("RUB", "Российский рубль", "₽", "🇷🇺", 92.50, CurrencyRegion.POPULAR),
+        Currency("TJS", "Таджикский сомони", "смн", "🇹🇯", 10.95, CurrencyRegion.POPULAR),
+        Currency("UZS", "Узбекский сум", "so'm", "🇺🇿", 12650.0, CurrencyRegion.POPULAR),
+        Currency("KZT", "Казахстанский тенге", "₸", "🇰🇿", 480.0, CurrencyRegion.POPULAR),
+        Currency("KGS", "Кыргызский сом", "сом", "🇰🇬", 86.80, CurrencyRegion.POPULAR),
+        Currency("TRY", "Турецкая лира", "₺", "🇹🇷", 34.20, CurrencyRegion.POPULAR),
+        Currency("AED", "Дирхам ОАЭ", "د.إ", "🇦🇪", 3.67, CurrencyRegion.POPULAR),
+        Currency("CNY", "Китайский юань", "¥", "🇨🇳", 7.23, CurrencyRegion.POPULAR),
+        Currency("GBP", "Британский фунт", "£", "🇬🇧", 0.79, CurrencyRegion.POPULAR),
+        Currency("JPY", "Японская иена", "¥", "🇯🇵", 154.3, CurrencyRegion.POPULAR),
+        Currency("SAR", "Саудовский риал", "﷼", "🇸🇦", 3.75, CurrencyRegion.POPULAR),
+
+        // Asia & CIS
+        Currency("AFN", "Афганский афгани", "؋", "🇦🇫", 70.80, CurrencyRegion.ASIA),
+        Currency("AMD", "Армянский драм", "֏", "🇦🇲", 387.5, CurrencyRegion.ASIA),
+        Currency("AZN", "Азербайджанский манат", "₼", "🇦🇿", 1.70, CurrencyRegion.ASIA),
+        Currency("BDT", "Бангладешская така", "৳", "🇧🇩", 119.5, CurrencyRegion.ASIA),
+        Currency("BHD", "Бахрейнский динар", ".د.ب", "🇧🇭", 0.376, CurrencyRegion.ASIA),
+        Currency("BYN", "Белорусский рубль", "Br", "🇧🇾", 3.28, CurrencyRegion.ASIA),
+        Currency("GEL", "Грузинский лари", "₾", "🇬🇪", 2.74, CurrencyRegion.ASIA),
+        Currency("HKD", "Гонконгский доллар", "HK$", "🇭🇰", 7.82, CurrencyRegion.ASIA),
+        Currency("IDR", "Индонезийская рупия", "Rp", "🇮🇩", 16200.0, CurrencyRegion.ASIA),
+        Currency("ILS", "Новый израильский шекель", "₪", "🇮🇱", 3.72, CurrencyRegion.ASIA),
+        Currency("INR", "Индийская рупия", "₹", "🇮🇳", 83.50, CurrencyRegion.ASIA),
+        Currency("IQD", "Иракский динар", "ع.د", "🇮🇶", 1310.0, CurrencyRegion.ASIA),
+        Currency("IRR", "Иранский риал", "﷼", "🇮🇷", 42250.0, CurrencyRegion.ASIA),
+        Currency("JOD", "Иорданский динар", "د.ا", "🇯🇴", 0.709, CurrencyRegion.ASIA),
+        Currency("KRW", "Южнокорейская вона", "₩", "🇰🇷", 1380.0, CurrencyRegion.ASIA),
+        Currency("KWD", "Кувейтский динар", "د.ك", "🇰🇼", 0.307, CurrencyRegion.ASIA),
+        Currency("LKR", "Шри-ланкийская рупия", "Rs", "🇱🇰", 302.0, CurrencyRegion.ASIA),
+        Currency("MMK", "Мьянманский кьят", "K", "🇲🇲", 2100.0, CurrencyRegion.ASIA),
+        Currency("MNT", "Монгольский тугрик", "₮", "🇲🇳", 3450.0, CurrencyRegion.ASIA),
+        Currency("MYR", "Малайзийский ринггит", "RM", "🇲🇾", 4.72, CurrencyRegion.ASIA),
+        Currency("NPR", "Непальская рупия", "रु", "🇳🇵", 133.5, CurrencyRegion.ASIA),
+        Currency("OMR", "Оманский риал", "ر.ع.", "🇴🇲", 0.384, CurrencyRegion.ASIA),
+        Currency("PHP", "Филиппинское песо", "₱", "🇵🇭", 58.50, CurrencyRegion.ASIA),
+        Currency("PKR", "Пакистанская рупия", "₨", "🇵🇰", 278.5, CurrencyRegion.ASIA),
+        Currency("QAR", "Катарский риал", "ر.ق", "🇶🇦", 3.64, CurrencyRegion.ASIA),
+        Currency("SGD", "Сингапурский доллар", "S$", "🇸🇬", 1.35, CurrencyRegion.ASIA),
+        Currency("THB", "Тайский бат", "฿", "🇹🇭", 36.70, CurrencyRegion.ASIA),
+        Currency("TMT", "Туркменский манат", "m", "🇹🇲", 3.50, CurrencyRegion.ASIA),
+        Currency("TWD", "Новый тайваньский доллар", "NT$", "🇹🇼", 32.40, CurrencyRegion.ASIA),
+        Currency("UAH", "Украинская гривна", "₴", "🇺🇦", 40.80, CurrencyRegion.ASIA),
+        Currency("VND", "Вьетнамский донг", "₫", "🇻🇳", 25400.0, CurrencyRegion.ASIA),
+        Currency("LAK", "Лаосский кип", "₭", "🇱🇦", 21800.0, CurrencyRegion.ASIA),
+        Currency("KHR", "Камбоджийский риель", "៛", "🇰🇭", 4100.0, CurrencyRegion.ASIA),
+        Currency("BND", "Брунейский доллар", "B$", "🇧🇳", 1.35, CurrencyRegion.ASIA),
+        Currency("BTN", "Бутанский нгултрум", "Nu.", "🇧🇹", 83.5, CurrencyRegion.ASIA),
+        Currency("LBP", "Ливанский фунт", "ل.ل", "🇱🇧", 89500.0, CurrencyRegion.ASIA),
+        Currency("MOP", "Макао патака", "MOP$", "🇲🇴", 8.05, CurrencyRegion.ASIA),
+        Currency("MVR", "Мальдивская руфия", "Rf", "🇲🇻", 15.4, CurrencyRegion.ASIA),
+        Currency("SYP", "Сирийский фунт", "£S", "🇸🇾", 13000.0, CurrencyRegion.ASIA),
+        Currency("YER", "Йеменский риал", "﷼", "🇾🇪", 250.0, CurrencyRegion.ASIA),
+
+        // Europe
+        Currency("CHF", "Швейцарский франк", "CHF", "🇨🇭", 0.90, CurrencyRegion.EUROPE),
+        Currency("PLN", "Польский злотый", "zł", "🇵🇱", 4.02, CurrencyRegion.EUROPE),
+        Currency("CZK", "Чешская крона", "Kč", "🇨🇿", 23.2, CurrencyRegion.EUROPE),
+        Currency("HUF", "Венгерский форинт", "Ft", "🇭🇺", 365.0, CurrencyRegion.EUROPE),
+        Currency("RON", "Румынский лей", "lei", "🇷🇴", 4.60, CurrencyRegion.EUROPE),
+        Currency("BGN", "Болгарский лев", "лв", "🇧🇬", 1.80, CurrencyRegion.EUROPE),
+        Currency("SEK", "Шведская крона", "kr", "🇸🇪", 10.60, CurrencyRegion.EUROPE),
+        Currency("NOK", "Норвежская крона", "kr", "🇳🇴", 10.75, CurrencyRegion.EUROPE),
+        Currency("DKK", "Датская крона", "kr", "🇩🇰", 6.89, CurrencyRegion.EUROPE),
+        Currency("ISK", "Исландская крона", "kr", "🇮🇸", 138.5, CurrencyRegion.EUROPE),
+        Currency("RSD", "Сербский динар", "дин.", "🇷🇸", 108.0, CurrencyRegion.EUROPE),
+        Currency("BAM", "Боснийская конвертируемая марка", "KM", "🇧🇦", 1.80, CurrencyRegion.EUROPE),
+        Currency("MKD", "Македонский денар", "ден", "🇲🇰", 56.8, CurrencyRegion.EUROPE),
+        Currency("ALL", "Албанский лек", "L", "🇦🇱", 93.0, CurrencyRegion.EUROPE),
+        Currency("MDL", "Молдавский лей", "L", "🇲🇩", 17.8, CurrencyRegion.EUROPE),
+        Currency("GIP", "Гибралтарский фунт", "£", "🇬🇮", 0.79, CurrencyRegion.EUROPE),
+
+        // America
+        Currency("CAD", "Канадский доллар", "C$", "🇨🇦", 1.37, CurrencyRegion.AMERICA),
+        Currency("MXN", "Мексиканское песо", "$", "🇲🇽", 18.2, CurrencyRegion.AMERICA),
+        Currency("BRL", "Бразильский реал", "R$", "🇧🇷", 5.45, CurrencyRegion.AMERICA),
+        Currency("ARS", "Аргентинское песо", "$", "🇦🇷", 920.0, CurrencyRegion.AMERICA),
+        Currency("CLP", "Чилийское песо", "$", "🇨🇱", 940.0, CurrencyRegion.AMERICA),
+        Currency("COP", "Колумбийское песо", "$", "🇨🇴", 4120.0, CurrencyRegion.AMERICA),
+        Currency("PEN", "Перуанский соль", "S/.", "🇵🇪", 3.78, CurrencyRegion.AMERICA),
+        Currency("UYU", "Уругвайское песо", "\$U", "🇺🇾", 39.5, CurrencyRegion.AMERICA),
+        Currency("BOB", "Боливийский боливиано", "Bs.", "🇧🇴", 6.91, CurrencyRegion.AMERICA),
+        Currency("CRC", "Коста-риканский колон", "₡", "🇨🇷", 525.0, CurrencyRegion.AMERICA),
+        Currency("DOP", "Доминиканское песо", "RD$", "🇩🇴", 59.2, CurrencyRegion.AMERICA),
+        Currency("GTQ", "Гватемальский кетсаль", "Q", "🇬🇹", 7.78, CurrencyRegion.AMERICA),
+        Currency("HNL", "Гондурасская лемпира", "L", "🇭🇳", 24.7, CurrencyRegion.AMERICA),
+        Currency("JMD", "Ямайский доллар", "J$", "🇯🇲", 156.0, CurrencyRegion.AMERICA),
+        Currency("NIO", "Никарагуанская кордоба", "C$", "🇳🇮", 36.8, CurrencyRegion.AMERICA),
+        Currency("PAB", "Панамский бальбоа", "B/.", "🇵🇦", 1.0, CurrencyRegion.AMERICA),
+        Currency("PYG", "Парагвайский гуарани", "₲", "🇵🇾", 7550.0, CurrencyRegion.AMERICA),
+        Currency("TTD", "Доллар Тринидада и Тобаго", "TT$", "🇹🇹", 6.78, CurrencyRegion.AMERICA),
+        Currency("VES", "Венесуэльский боливар", "Bs.", "🇻🇪", 36.5, CurrencyRegion.AMERICA),
+        Currency("BBD", "Барбадосский доллар", "Bds$", "🇧🇧", 2.0, CurrencyRegion.AMERICA),
+        Currency("BZD", "Белизский доллар", "BZ$", "🇧🇿", 2.0, CurrencyRegion.AMERICA),
+        Currency("BSD", "Багамский доллар", "B$", "🇧🇸", 1.0, CurrencyRegion.AMERICA),
+        Currency("CUP", "Кубинское песо", "₱", "🇨🇺", 24.0, CurrencyRegion.AMERICA),
+        Currency("GYD", "Гайанский доллар", "G$", "🇬🇾", 209.0, CurrencyRegion.AMERICA),
+        Currency("HTG", "Гаитянский гурд", "G", "🇭🇹", 132.0, CurrencyRegion.AMERICA),
+        Currency("SRD", "Суринамский доллар", "Sr$", "🇸🇷", 30.5, CurrencyRegion.AMERICA),
+        Currency("XCD", "Восточно-карибский доллар", "EC$", "🇦🇬", 2.70, CurrencyRegion.AMERICA),
+
+        // Africa
+        Currency("EGP", "Египетский фунт", "E£", "🇪🇬", 48.2, CurrencyRegion.AFRICA),
+        Currency("ZAR", "Южноафриканский рэнд", "R", "🇿🇦", 18.3, CurrencyRegion.AFRICA),
+        Currency("NGN", "Нигерийская найра", "₦", "🇳🇬", 1500.0, CurrencyRegion.AFRICA),
+        Currency("KES", "Кенийский шиллинг", "KSh", "🇰🇪", 129.5, CurrencyRegion.AFRICA),
+        Currency("MAD", "Марокканский дирхам", "DH", "🇲🇦", 9.95, CurrencyRegion.AFRICA),
+        Currency("DZD", "Алжирский динар", "DA", "🇩🇿", 134.5, CurrencyRegion.AFRICA),
+        Currency("TND", "Тунисский динар", "DT", "🇹🇳", 3.12, CurrencyRegion.AFRICA),
+        Currency("GHS", "Ганский седи", "GH₵", "🇬🇭", 15.2, CurrencyRegion.AFRICA),
+        Currency("ETB", "Эфиопский быр", "Br", "🇪🇹", 57.5, CurrencyRegion.AFRICA),
+        Currency("TZS", "Танзанийский шиллинг", "TSh", "🇹🇿", 2620.0, CurrencyRegion.AFRICA),
+        Currency("UGX", "Угандийский шиллинг", "USh", "🇺🇬", 3730.0, CurrencyRegion.AFRICA),
+        Currency("XOF", "Западноафриканский франк КФА", "CFA", "🇸🇳", 605.0, CurrencyRegion.AFRICA),
+        Currency("XAF", "Центральноафриканский франк КФА", "FCFA", "🇨🇲", 605.0, CurrencyRegion.AFRICA),
+        Currency("AOA", "Ангольская кванза", "Kz", "🇦🇴", 860.0, CurrencyRegion.AFRICA),
+        Currency("BWP", "Ботсванская пула", "P", "🇧🇼", 13.6, CurrencyRegion.AFRICA),
+        Currency("CDF", "Конголезский франк", "FC", "🇨🇩", 2820.0, CurrencyRegion.AFRICA),
+        Currency("CVE", "Эскудо Кабо-Верде", "$", "🇨🇻", 102.0, CurrencyRegion.AFRICA),
+        Currency("DJF", "Джибутийский франк", "Fdj", "🇩🇯", 178.0, CurrencyRegion.AFRICA),
+        Currency("ERN", "Эритрейская накфа", "Nfk", "🇪🇷", 15.0, CurrencyRegion.AFRICA),
+        Currency("GMD", "Гамбийский даласи", "D", "🇬🇲", 68.5, CurrencyRegion.AFRICA),
+        Currency("GNF", "Гвинейский франк", "FG", "🇬🇳", 8600.0, CurrencyRegion.AFRICA),
+        Currency("LSL", "Лесотский лоти", "L", "🇱🇸", 18.3, CurrencyRegion.AFRICA),
+        Currency("LRD", "Либерийский доллар", "L$", "🇱🇷", 194.0, CurrencyRegion.AFRICA),
+        Currency("LYD", "Ливийский динар", "LD", "🇱🇾", 4.85, CurrencyRegion.AFRICA),
+        Currency("MGA", "Малагасийский ариари", "Ar", "🇲🇬", 4500.0, CurrencyRegion.AFRICA),
+        Currency("MRU", "Мавританская угия", "UM", "🇲🇷", 39.8, CurrencyRegion.AFRICA),
+        Currency("MUR", "Маврикийская рупия", "₨", "🇲🇺", 46.5, CurrencyRegion.AFRICA),
+        Currency("MWK", "Малавийская квача", "MK", "🇲🇼", 1740.0, CurrencyRegion.AFRICA),
+        Currency("MZN", "Мозамбикский метикал", "MT", "🇲🇿", 63.9, CurrencyRegion.AFRICA),
+        Currency("NAD", "Намибийский доллар", "N$", "🇳🇦", 18.3, CurrencyRegion.AFRICA),
+        Currency("RWF", "Руандийский франк", "RF", "🇷🇼", 1315.0, CurrencyRegion.AFRICA),
+        Currency("SCR", "Сейшельская рупия", "SR", "🇸🇨", 13.8, CurrencyRegion.AFRICA),
+        Currency("SDG", "Суданский фунт", "SDG", "🇸🇩", 601.0, CurrencyRegion.AFRICA),
+        Currency("SLE", "Сьерра-леонский леоне", "Le", "🇸🇱", 22.8, CurrencyRegion.AFRICA),
+        Currency("SOS", "Сомалийский шиллинг", "Sh.So.", "🇸🇴", 571.0, CurrencyRegion.AFRICA),
+        Currency("SZL", "Свазилендский лилангени", "E", "🇸🇿", 18.3, CurrencyRegion.AFRICA),
+        Currency("ZMW", "Замбийская квача", "ZK", "🇿🇲", 25.5, CurrencyRegion.AFRICA),
+
+        // Oceania
+        Currency("AUD", "Австралийский доллар", "A$", "🇦🇺", 1.50, CurrencyRegion.OCEANIA),
+        Currency("NZD", "Новозеландский доллар", "NZ$", "🇳🇿", 1.63, CurrencyRegion.OCEANIA),
+        Currency("FJD", "Фиджийский доллар", "FJ$", "🇫🇯", 2.25, CurrencyRegion.OCEANIA),
+        Currency("PGK", "Папуасская кина", "K", "🇵🇬", 3.88, CurrencyRegion.OCEANIA),
+        Currency("SBD", "Доллар Соломоновых Островов", "SI$", "🇸🇧", 8.45, CurrencyRegion.OCEANIA),
+        Currency("TOP", "Тонганская паанга", "T$", "🇹🇴", 2.36, CurrencyRegion.OCEANIA),
+        Currency("VUV", "Вануатский вату", "VT", "🇻🇺", 119.0, CurrencyRegion.OCEANIA),
+        Currency("WST", "Самоанская тала", "WS$", "🇼🇸", 2.74, CurrencyRegion.OCEANIA),
+        Currency("XPF", "Французский тихоокеанский франк", "₣", "🇵🇫", 110.0, CurrencyRegion.OCEANIA),
+
+        // Cryptocurrencies
+        Currency("BTC", "Bitcoin", "₿", "🪙", 0.000015, CurrencyRegion.CRYPTO, isCrypto = true),
+        Currency("ETH", "Ethereum", "Ξ", "🪙", 0.00029, CurrencyRegion.CRYPTO, isCrypto = true),
+        Currency("USDT", "Tether USD", "₮", "🪙", 1.0, CurrencyRegion.CRYPTO, isCrypto = true),
+        Currency("USDC", "USD Coin", "$", "🪙", 1.0, CurrencyRegion.CRYPTO, isCrypto = true),
+        Currency("BNB", "Binance Coin", "BNB", "🪙", 0.0017, CurrencyRegion.CRYPTO, isCrypto = true),
+        Currency("SOL", "Solana", "SOL", "🪙", 0.0071, CurrencyRegion.CRYPTO, isCrypto = true),
+        Currency("TON", "Toncoin", "TON", "🪙", 0.18, CurrencyRegion.CRYPTO, isCrypto = true),
+        Currency("XRP", "Ripple", "XRP", "🪙", 1.85, CurrencyRegion.CRYPTO, isCrypto = true),
+        Currency("ADA", "Cardano", "ADA", "🪙", 2.65, CurrencyRegion.CRYPTO, isCrypto = true),
+        Currency("DOGE", "Dogecoin", "Ð", "🪙", 8.2, CurrencyRegion.CRYPTO, isCrypto = true),
+        Currency("AVAX", "Avalanche", "AVAX", "🪙", 0.038, CurrencyRegion.CRYPTO, isCrypto = true),
+        Currency("TRX", "TRON", "TRX", "🪙", 8.3, CurrencyRegion.CRYPTO, isCrypto = true),
+        Currency("DOT", "Polkadot", "DOT", "🪙", 0.17, CurrencyRegion.CRYPTO, isCrypto = true),
+        Currency("LINK", "Chainlink", "LINK", "🪙", 0.075, CurrencyRegion.CRYPTO, isCrypto = true),
+        Currency("NEAR", "NEAR Protocol", "NEAR", "🪙", 0.21, CurrencyRegion.CRYPTO, isCrypto = true),
+        Currency("LTC", "Litecoin", "Ł", "🪙", 0.013, CurrencyRegion.CRYPTO, isCrypto = true),
+        Currency("POL", "Polygon", "POL", "🪙", 2.7, CurrencyRegion.CRYPTO, isCrypto = true),
+        Currency("BCH", "Bitcoin Cash", "BCH", "🪙", 0.0026, CurrencyRegion.CRYPTO, isCrypto = true),
+        Currency("ATOM", "Cosmos", "ATOM", "🪙", 0.16, CurrencyRegion.CRYPTO, isCrypto = true),
+
+        // Metals & IMF
+        Currency("XAU", "Золото (Тройская унция)", "XAU", "🥇", 0.00042, CurrencyRegion.METALS, isMetal = true),
+        Currency("XAG", "Серебро (Тройская унция)", "XAG", "🥈", 0.033, CurrencyRegion.METALS, isMetal = true),
+        Currency("XPT", "Платина (Тройская унция)", "XPT", "✨", 0.00105, CurrencyRegion.METALS, isMetal = true),
+        Currency("XPD", "Палладий (Тройская унция)", "XPD", "✨", 0.00108, CurrencyRegion.METALS, isMetal = true),
+        Currency("XDR", "СДР (Спецправа заимствования МВФ)", "SDR", "🌐", 0.76, CurrencyRegion.METALS),
+
+        // Outdated Currencies
+        Currency("DEM", "Немецкая марка (устаревшая)", "DM", "🇩🇪", 1.95583, CurrencyRegion.OUTDATED, isOutdated = true),
+        Currency("FRF", "Французский франк (устаревшая)", "F", "🇫🇷", 6.55957, CurrencyRegion.OUTDATED, isOutdated = true),
+        Currency("ITL", "Итальянская лира (устаревшая)", "₤", "🇮🇹", 1936.27, CurrencyRegion.OUTDATED, isOutdated = true),
+        Currency("ESP", "Испанская песета (устаревшая)", "₧", "🇪🇸", 166.386, CurrencyRegion.OUTDATED, isOutdated = true),
+        Currency("NLG", "Нидерландский гульден (устаревшая)", "ƒ", "🇳🇱", 2.20371, CurrencyRegion.OUTDATED, isOutdated = true),
+        Currency("BEF", "Бельгийский франк (устаревшая)", "FB", "🇧🇪", 40.3399, CurrencyRegion.OUTDATED, isOutdated = true),
+        Currency("ATS", "Австрийский шиллинг (устаревшая)", "öS", "🇦🇹", 13.7603, CurrencyRegion.OUTDATED, isOutdated = true),
+        Currency("FIM", "Финляндская марка (устаревшая)", "mk", "🇫🇮", 5.94573, CurrencyRegion.OUTDATED, isOutdated = true),
+        Currency("PTE", "Португальское эскудо (устаревшая)", "Esc", "🇵🇹", 200.482, CurrencyRegion.OUTDATED, isOutdated = true),
+        Currency("GRD", "Греческая драхма (устаревшая)", "₯", "🇬🇷", 340.75, CurrencyRegion.OUTDATED, isOutdated = true),
+        Currency("IEP", "Ирландский фунт (устаревшая)", "£", "🇮🇪", 0.787564, CurrencyRegion.OUTDATED, isOutdated = true),
+        Currency("SUR", "Советский рубль (устаревшая)", "руб.", "🚩", 0.60, CurrencyRegion.OUTDATED, isOutdated = true),
+        Currency("CSK", "Чехословацкая крона (устаревшая)", "Kčs", "🇨🇿", 28.0, CurrencyRegion.OUTDATED, isOutdated = true),
+        Currency("YUN", "Югославский динар (устаревшая)", "дин", "🇷🇸", 1.0, CurrencyRegion.OUTDATED, isOutdated = true),
+        Currency("ZWR", "Зимбабвийский доллар 2008 (устаревшая)", "Z$", "🇿🇼", 1000000000.0, CurrencyRegion.OUTDATED, isOutdated = true)
+    )
+
+    fun getCurrency(code: String): Currency {
+        return allCurrencies.firstOrNull { it.code.equals(code, ignoreCase = true) } ?: defaultCurrency
+    }
+
+    fun convert(amount: Double, fromCode: String, toCode: String): Double {
+        val from = getCurrency(fromCode)
+        val to = getCurrency(toCode)
+        if (from.rateToUsd <= 0 || to.rateToUsd <= 0) return 0.0
+        val amountInUsd = amount / from.rateToUsd
+        return amountInUsd * to.rateToUsd
+    }
+}
